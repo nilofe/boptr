@@ -2,14 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: node-hello-world
-  name: node-hello-world
+    app: node-test3
+  name: node-test3
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: node-hello-world
+      app: node-test3
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,11 +18,11 @@ spec:
   template:
     metadata:
       labels:
-        app: node-hello-world
+        app: node-test3
     spec:
       containers:
         - image: >-
-            gcr.io/kubernetes-helm-295208/github.com/cassanellicarlo/kubernetes-terraform
+            gcr.io/savvy-pad-350214/github.com/nilofe/boptr
           imagePullPolicy: IfNotPresent
           name: kubernetes-terraform-1
 ---
@@ -30,8 +30,8 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   labels:
-    app: node-hello-world
-  name: node-hello-world-hpa-wye8
+    app: node-test3
+  name: node-test3
   namespace: default
 spec:
   maxReplicas: 5
@@ -44,4 +44,4 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: node-hello-world
+    name: node-test3
